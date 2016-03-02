@@ -2,7 +2,7 @@
 $l['rineditor_plug_desc'] = 'Rin Editor (Powerd by CKEditor)';
 $l['rineditor_sett_desc'] = 'Settings related to the Rin Editor.';
 $l['rineditor_language_title'] = 'Language of Rin Editor';
-$l['rineditor_language_desc'] = 'Set here language of Rin Editor. Ps. Use default if you want editor detect browser language'.;
+$l['rineditor_language_desc'] = 'Set here language of Rin Editor. Ps. Use default if you want editor detect browser language.';
 $l['rineditor_language_val'] = '=Default
 af=af
 ar=ar
