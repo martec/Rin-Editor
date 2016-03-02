@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.6.2');
+define('RE_PLUGIN_VER', '0.6.3');
 
 function rineditor_info()
 {
@@ -77,6 +77,17 @@ function rineditor_install()
 		'disporder'	=> 1,
 		'gid'		=> $groupid
 	);
+	
+	$new_setting[] = array(
+		'name'		=> 'rineditor_language',
+		'title'		=> $lang->rineditor_language_title,
+		'description'	=> $lang->rineditor_language_desc,
+		'optionscode'	=> 'select
+'.$lang->rineditor_language_val.'',
+		'value'		=> '',
+		'disporder'	=> 2,
+		'gid'		=> $groupid
+	);
 
 	$new_setting[] = array(
 		'name'		=> 'rineditor_quickquote',
@@ -84,10 +95,9 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_quickquote_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '1',
-		'disporder'	=> 2,
+		'disporder'	=> 3,
 		'gid'		=> $groupid
 	);
-
 
 	$new_setting[] = array(
 		'name'		=> 'rineditor_smile',
@@ -95,7 +105,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_smile_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '1',
-		'disporder'	=> 3,
+		'disporder'	=> 4,
 		'gid'		=> $groupid
 	);
 
@@ -105,7 +115,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_autosave_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '0',
-		'disporder'	=> 4,
+		'disporder'	=> 5,
 		'gid'		=> $groupid
 	);
 
@@ -115,7 +125,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_heightf_desc,
 		'optionscode'	=> 'numeric',
 		'value'		=> '250',
-		'disporder'	=> 5,
+		'disporder'	=> 6,
 		'gid'		=> $groupid
 	);
 
@@ -125,7 +135,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_heighto_desc,
 		'optionscode'	=> 'numeric',
 		'value'		=> '200',
-		'disporder'	=> 6,
+		'disporder'	=> 7,
 		'gid'		=> $groupid
 	);
 
@@ -135,7 +145,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_buttonsf_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> 'Subscript,Superscript',
-		'disporder'	=> 7,
+		'disporder'	=> 8,
 		'gid'		=> $groupid
 	);
 
@@ -145,7 +155,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_buttonsf_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> 'Subscript,Superscript',
-		'disporder'	=> 8,
+		'disporder'	=> 9,
 		'gid'		=> $groupid
 	);
 
@@ -155,7 +165,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 9,
+		'disporder'	=> 10,
 		'gid'		=> $groupid
 	);
 
@@ -165,7 +175,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 10,
+		'disporder'	=> 11,
 		'gid'		=> $groupid
 	);
 
@@ -175,7 +185,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 11,
+		'disporder'	=> 12,
 		'gid'		=> $groupid
 	);
 
@@ -185,7 +195,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 12,
+		'disporder'	=> 13,
 		'gid'		=> $groupid
 	);
 
@@ -195,7 +205,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_imgur_desc,
 		'optionscode'	=> 'text',
 		'value'		=> '',
-		'disporder'	=> 13,
+		'disporder'	=> 14,
 		'gid'		=> $groupid
 	);
 
@@ -239,6 +249,7 @@ dropdownsmiliesdes = [{\$dropdownsmiliesdes}],
 dropdownsmiliesnam = [{\$dropdownsmiliesnam}],
 smileydirectory = '{\$theme['imgdir']}/smilies/',
 rinstartupmode = '{\$sourcemode}',
+rinlanguage = '{\$rinlang}',
 rinheight = '{\$rin_height}',
 rinrmvbut = '{\$rin_rmvbut}',
 extrabut = '{\$rin_extbut}',
@@ -445,6 +456,12 @@ function rineditor_deactivate()
 		'#' . preg_quote('{$post[\'quick_quote\']}{$post[\'iplogged\']}') . '#i',
 		'{$post[\'iplogged\']}'
 	);
+	
+	find_replace_templatesets(
+		'postbit',
+		'#' . preg_quote('{$post[\'quick_quote\']}{$post[\'iplogged\']}') . '#i',
+		'{$post[\'iplogged\']}'
+	);	
 
 	find_replace_templatesets(
 		'post_attachments_attachment_postinsert',
@@ -615,6 +632,8 @@ function rineditor_inserter_quick($smilies = true)
 	else {
 		$sourcemode = "wysiwyg";
 	}
+	
+		$rinlang = $mybb->settings['rineditor_language'];
 
 	eval("\$rininsertquick = \"".$templates->get("rinbutquick")."\";");
 
