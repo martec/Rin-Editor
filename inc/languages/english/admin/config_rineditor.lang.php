@@ -1,4 +1,5 @@
 <?php
+$l['rineditor_restore'] = 'Restore';
 $l['rineditor_plug_desc'] = 'Rin Editor (Powerd by CKEditor)';
 $l['rineditor_sett_desc'] = 'Settings related to the Rin Editor.';
 $l['rineditor_language_title'] = 'Language of Rin Editor';

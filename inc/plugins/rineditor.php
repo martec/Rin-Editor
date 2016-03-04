@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.6.5');
+define('RE_PLUGIN_VER', '0.6.6');
 
 function rineditor_info()
 {
@@ -246,7 +246,11 @@ function rineditor_activate()
 {\$editor_language}
 var dropdownsmiliesurl = [{\$dropdownsmiliesurl}],
 dropdownsmiliesdes = [{\$dropdownsmiliesdes}],
-dropdownsmiliesnam = [{\$dropdownsmiliesnam}],
+dropdownsmiliesname = [{\$dropdownsmiliesname}],
+dropdownsmiliesurlmore = [{\$dropdownsmiliesurlmore}],
+dropdownsmiliesdesmore = [{\$dropdownsmiliesdesmore}],
+dropdownsmiliesnamemore = [{\$dropdownsmiliesnamemore}],
+smileydirectory = '{\$theme['imgdir']}/smilies/',
 smileydirectory = '{\$theme['imgdir']}/smilies/',
 rinstartupmode = '{\$sourcemode}',
 rinlanguage = '{\$rinlang}',
@@ -514,6 +518,10 @@ function rineditor_inserter_quick($smilies = true)
 {
 	global $db, $mybb, $theme, $templates, $lang, $smiliecache, $cache, $templatelist;
 
+	if (!$lang->rineditor) {
+		$lang->load('rineditor');
+	}
+
 	$editor_lang_strings = array(
 		"editor_videourl" => "Video URL:",
 		"editor_videotype" => "Video Type:",
@@ -528,7 +536,9 @@ function rineditor_inserter_quick($smilies = true)
 		"editor_youtube" => "Youtube",
 		"editor_facebook" => "Facebook",
 		"editor_liveleak" => "LiveLeak",
-		"editor_insertvideo" => "Insert a video"
+		"editor_insertvideo" => "Insert a video",
+		"editor_more" => "More",
+		"rineditor_restore" => "Restore",
 	);
 	$editor_language = "RinEditor = {\n";
 
@@ -581,7 +591,8 @@ function rineditor_inserter_quick($smilies = true)
 		{
 			reset($smiliecache);
 
-			$smilies_json = $dropdownsmilies = $moresmilies = "";
+			$dropdownsmiliesurl = $dropdownsmiliesdes = $dropdownsmiliesnam = $dropdownsmiliesurlmore = $dropdownsmiliesdesmore = $dropdownsmiliesnamemore = "";
+			$i = 0;
 
 			foreach($smiliecache as $smilie)
 			{
@@ -594,14 +605,25 @@ function rineditor_inserter_quick($smilies = true)
 				$image = htmlspecialchars_uni($smilie['image']);
 				$name = htmlspecialchars_uni($smilie['name']);
 
-				$dropdownsmiliesurl .= '"'.$mybb->asset_url.'/'.$image.'",';
-				$dropdownsmiliesdes .= '"'.$find.'",';
-				$dropdownsmiliesnam .= '"'.$name.'",';
+				if($i < $mybb->settings['smilieinsertertot'])
+				{
+					$dropdownsmiliesurl .= '"'.$mybb->asset_url.'/'.$image.'",';
+					$dropdownsmiliesdes .= '"'.$find.'",';
+					$dropdownsmiliesname .= '"'.$name.'",';
+				}
+				else
+				{
+					$dropdownsmiliesurlmore .= '"'.$mybb->asset_url.'/'.$image.'",';
+					$dropdownsmiliesdesmore .= '"'.$find.'",';
+					$dropdownsmiliesnamemore .= '"'.$name.'",';
+				}
+
+				++$i;
 			}
 		}
 	}
 
-	$quickquote = $sourcemode = $rin_height = $rin_rmvbut = $rin_extbut = $rin_extbutd = $rin_imgur = $rin_autosave = "";
+	$quickquote = $sourcemode = $rin_height = $rin_rmvbut = $rin_extbut = $rin_extbutd = $rin_imgur = $rin_autosave = $rinlang = "";
 
 	if(strpos($templatelist,'showthread_quickreply') || strpos($templatelist,'private_quickreply')) {
 		$rin_height = $mybb->settings['rineditor_height_other'];
@@ -633,7 +655,7 @@ function rineditor_inserter_quick($smilies = true)
 		$sourcemode = "wysiwyg";
 	}
 	
-		$rinlang = $mybb->settings['rineditor_language'];
+	$rinlang = $mybb->settings['rineditor_language'];
 
 	eval("\$rininsertquick = \"".$templates->get("rinbutquick")."\";");
 
