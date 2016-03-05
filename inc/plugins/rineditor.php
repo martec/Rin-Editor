@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.6.6');
+define('RE_PLUGIN_VER', '0.6.7');
 
 function rineditor_info()
 {
@@ -108,6 +108,16 @@ function rineditor_install()
 		'disporder'	=> 4,
 		'gid'		=> $groupid
 	);
+	
+	$new_setting[] = array(
+		'name'		=> 'rineditor_smiley_sc',
+		'title'		=> $lang->rineditor_scsmiley_title,
+		'description'	=> $lang->rineditor_scsmiley_desc,
+		'optionscode'	=> 'yesno',
+		'value'		=> '0',
+		'disporder'	=> 5,
+		'gid'		=> $groupid
+	);
 
 	$new_setting[] = array(
 		'name'		=> 'rineditor_autosave',
@@ -115,7 +125,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_autosave_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '0',
-		'disporder'	=> 5,
+		'disporder'	=> 6,
 		'gid'		=> $groupid
 	);
 
@@ -125,7 +135,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_heightf_desc,
 		'optionscode'	=> 'numeric',
 		'value'		=> '250',
-		'disporder'	=> 6,
+		'disporder'	=> 7,
 		'gid'		=> $groupid
 	);
 
@@ -135,7 +145,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_heighto_desc,
 		'optionscode'	=> 'numeric',
 		'value'		=> '200',
-		'disporder'	=> 7,
+		'disporder'	=> 8,
 		'gid'		=> $groupid
 	);
 
@@ -145,7 +155,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_buttonsf_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> 'Subscript,Superscript',
-		'disporder'	=> 8,
+		'disporder'	=> 9,
 		'gid'		=> $groupid
 	);
 
@@ -155,7 +165,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_buttonsf_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> 'Subscript,Superscript',
-		'disporder'	=> 9,
+		'disporder'	=> 10,
 		'gid'		=> $groupid
 	);
 
@@ -165,7 +175,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 10,
+		'disporder'	=> 11,
 		'gid'		=> $groupid
 	);
 
@@ -175,7 +185,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 11,
+		'disporder'	=> 12,
 		'gid'		=> $groupid
 	);
 
@@ -185,7 +195,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 12,
+		'disporder'	=> 13,
 		'gid'		=> $groupid
 	);
 
@@ -195,7 +205,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 13,
+		'disporder'	=> 14,
 		'gid'		=> $groupid
 	);
 
@@ -205,7 +215,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_imgur_desc,
 		'optionscode'	=> 'text',
 		'value'		=> '',
-		'disporder'	=> 14,
+		'disporder'	=> 15,
 		'gid'		=> $groupid
 	);
 
@@ -251,7 +261,7 @@ dropdownsmiliesurlmore = [{\$dropdownsmiliesurlmore}],
 dropdownsmiliesdesmore = [{\$dropdownsmiliesdesmore}],
 dropdownsmiliesnamemore = [{\$dropdownsmiliesnamemore}],
 smileydirectory = '{\$theme['imgdir']}/smilies/',
-smileydirectory = '{\$theme['imgdir']}/smilies/',
+rinsmileysc = '{\$rinscsmiley}',
 rinstartupmode = '{\$sourcemode}',
 rinlanguage = '{\$rinlang}',
 rinheight = '{\$rin_height}',
@@ -623,7 +633,7 @@ function rineditor_inserter_quick($smilies = true)
 		}
 	}
 
-	$quickquote = $sourcemode = $rin_height = $rin_rmvbut = $rin_extbut = $rin_extbutd = $rin_imgur = $rin_autosave = $rinlang = "";
+	$quickquote = $sourcemode = $rin_height = $rin_rmvbut = $rin_extbut = $rin_extbutd = $rin_imgur = $rin_autosave = $rinlang = $rinscsmiley = "";
 
 	if(strpos($templatelist,'showthread_quickreply') || strpos($templatelist,'private_quickreply')) {
 		$rin_height = $mybb->settings['rineditor_height_other'];
@@ -656,6 +666,7 @@ function rineditor_inserter_quick($smilies = true)
 	}
 	
 	$rinlang = $mybb->settings['rineditor_language'];
+	$rinscsmiley = $mybb->settings['rineditor_smiley_sc'];
 
 	eval("\$rininsertquick = \"".$templates->get("rinbutquick")."\";");
 
