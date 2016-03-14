@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.6.9');
+define('RE_PLUGIN_VER', '0.6.10');
 
 function rineditor_info()
 {
@@ -271,10 +271,10 @@ extrabutdesc = '{\$rin_extbutd}',
 rinautosave = '{\$rin_autosave}',
 rinimgur = '{\$rin_imgur}';
 </script>
-{\$quickquote}
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/rineditor.js?ver=".RE_PLUGIN_VER."\"></script>
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/ckeditor.js?ver=".RE_PLUGIN_VER."\"></script>
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/adapters/jquery.js?ver=".RE_PLUGIN_VER."\"></script>
+{\$quickquote}
 <script type=\"text/javascript\">
 $('#message, #signature').ckeditor();
 
