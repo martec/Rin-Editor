@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.6.11');
+define('RE_PLUGIN_VER', '0.6.12');
 
 function rineditor_info()
 {
@@ -88,6 +88,16 @@ function rineditor_install()
 		'disporder'	=> 2,
 		'gid'		=> $groupid
 	);
+	
+	$new_setting[] = array(
+		'name'		=> 'rineditor_mobm_source',
+		'title'		=> $lang->rineditor_mobms_title,
+		'description'	=> $lang->rineditor_mobms_desc,
+		'optionscode'	=> 'yesno',
+		'value'		=> '1',
+		'disporder'	=> 3,
+		'gid'		=> $groupid
+	);
 
 	$new_setting[] = array(
 		'name'		=> 'rineditor_quickquote',
@@ -95,7 +105,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_quickquote_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '1',
-		'disporder'	=> 3,
+		'disporder'	=> 4,
 		'gid'		=> $groupid
 	);
 
@@ -105,7 +115,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_smile_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '1',
-		'disporder'	=> 4,
+		'disporder'	=> 5,
 		'gid'		=> $groupid
 	);
 	
@@ -115,7 +125,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_scsmiley_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '0',
-		'disporder'	=> 5,
+		'disporder'	=> 6,
 		'gid'		=> $groupid
 	);
 
@@ -125,7 +135,17 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_autosave_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '0',
-		'disporder'	=> 6,
+		'disporder'	=> 7,
+		'gid'		=> $groupid
+	);
+	
+	$new_setting[] = array(
+		'name'		=> 'rineditor_autosave_message',
+		'title'		=> $lang->rineditor_autosavemsg_title,
+		'description'	=> $lang->rineditor_autosavemsg_desc,
+		'optionscode'	=> 'yesno',
+		'value'		=> '1',
+		'disporder'	=> 8,
 		'gid'		=> $groupid
 	);
 
@@ -135,7 +155,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_heightf_desc,
 		'optionscode'	=> 'numeric',
 		'value'		=> '250',
-		'disporder'	=> 7,
+		'disporder'	=> 9,
 		'gid'		=> $groupid
 	);
 
@@ -145,7 +165,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_heighto_desc,
 		'optionscode'	=> 'numeric',
 		'value'		=> '200',
-		'disporder'	=> 8,
+		'disporder'	=> 10,
 		'gid'		=> $groupid
 	);
 
@@ -155,7 +175,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_buttonsf_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> 'Subscript,Superscript',
-		'disporder'	=> 9,
+		'disporder'	=> 11,
 		'gid'		=> $groupid
 	);
 
@@ -165,7 +185,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_buttonsf_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> 'Subscript,Superscript',
-		'disporder'	=> 10,
+		'disporder'	=> 12,
 		'gid'		=> $groupid
 	);
 
@@ -175,7 +195,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 11,
+		'disporder'	=> 13,
 		'gid'		=> $groupid
 	);
 
@@ -185,7 +205,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 12,
+		'disporder'	=> 14,
 		'gid'		=> $groupid
 	);
 
@@ -195,7 +215,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 13,
+		'disporder'	=> 15,
 		'gid'		=> $groupid
 	);
 
@@ -205,7 +225,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 14,
+		'disporder'	=> 16,
 		'gid'		=> $groupid
 	);
 
@@ -215,7 +235,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_imgur_desc,
 		'optionscode'	=> 'text',
 		'value'		=> '',
-		'disporder'	=> 15,
+		'disporder'	=> 17,
 		'gid'		=> $groupid
 	);
 
@@ -263,12 +283,14 @@ dropdownsmiliesnamemore = [{\$dropdownsmiliesnamemore}],
 smileydirectory = '{\$theme['imgdir']}/smilies/',
 rinsmileysc = '{\$rinscsmiley}',
 rinstartupmode = '{\$sourcemode}',
+rinmobsms = '{\$mybb->settings['rineditor_mobm_source']}'
 rinlanguage = '{\$rinlang}',
 rinheight = '{\$rin_height}',
 rinrmvbut = '{\$rin_rmvbut}',
 extrabut = '{\$rin_extbut}',
 extrabutdesc = '{\$rin_extbutd}',
 rinautosave = '{\$rin_autosave}',
+rinautosavemsg = '{\$mybb->settings['rineditor_autosave_message']}'
 rinimgur = '{\$rin_imgur}';
 </script>
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/rineditor.js?ver=".RE_PLUGIN_VER."\"></script>
