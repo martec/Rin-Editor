@@ -6,8 +6,8 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 body
 {
 	/* Font */
-	font-family: sans-serif, Arial, Verdana, "Trebuchet MS";
-	font-size: 12px;
+	font-family: Tahoma, Verdana, Arial, Sans-Serif;
+	font-size: 14px;
 
 	/* Text color */
 	color: #333;
@@ -15,13 +15,17 @@ body
 	/* Remove the background color to make it transparent */
 	background-color: #fff;
 
-	margin: 20px;
+	margin: 15px;
 }
 
 .cke_editable
 {
-	font-size: 13px;
-	line-height: 1.6;
+	font-size: 14px;
+	line-height: 1.4;
+}
+
+p {
+	margin: 0px;
 }
 
 blockquote {
