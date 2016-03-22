@@ -10,12 +10,12 @@ body
 	font-size: 14px;
 
 	/* Text color */
-	color: #333;
+	color: #000;
 
 	/* Remove the background color to make it transparent */
 	background-color: #fff;
 
-	margin: 15px;
+	margin: 10px;
 }
 
 .cke_editable
