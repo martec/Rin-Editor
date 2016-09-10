@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.6.19');
+define('RE_PLUGIN_VER', '0.7.0');
 
 function rineditor_info()
 {
@@ -280,17 +280,19 @@ dropdownsmiliesname = [{\$dropdownsmiliesname}],
 dropdownsmiliesurlmore = [{\$dropdownsmiliesurlmore}],
 dropdownsmiliesdesmore = [{\$dropdownsmiliesdesmore}],
 dropdownsmiliesnamemore = [{\$dropdownsmiliesnamemore}],
-smileydirectory = '{\$theme['imgdir']}/smilies/',
+smileydirectory = '{\$rinsmiledir}',
 rinsmileysc = '{\$rinscsmiley}',
 rinstartupmode = '{\$sourcemode}',
-rinmobsms = '{\$mybb->settings['rineditor_mobm_source']}'
+rinmobsms = '{\$mybb->settings['rineditor_mobm_source']}',
 rinlanguage = '{\$rinlang}',
 rinheight = '{\$rin_height}',
 rinrmvbut = '{\$rin_rmvbut}',
 extrabut = '{\$rin_extbut}',
 extrabutdesc = '{\$rin_extbutd}',
 rinautosave = '{\$rin_autosave}',
-rinautosavemsg = '{\$mybb->settings['rineditor_autosave_message']}'
+rinautosavemsg = '{\$mybb->settings['rineditor_autosave_message']}',
+rinvbquote = {\$rin_vbquote},
+rinskin = '{\$rin_style}',
 rinimgur = '{\$rin_imgur}';
 </script>
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/rineditor.js?ver=".RE_PLUGIN_VER."\"></script>
@@ -548,7 +550,7 @@ function re_cache()
 
 function rineditor_inserter_quick($smilies = true)
 {
-	global $db, $mybb, $theme, $templates, $lang, $smiliecache, $cache, $templatelist;
+	global $db, $mybb, $theme, $templates, $lang, $smiliecache, $cache, $templatelist, $plugins_cache;
 
 	if (!$lang->rineditor) {
 		$lang->load('rineditor');
@@ -623,7 +625,7 @@ function rineditor_inserter_quick($smilies = true)
 		{
 			reset($smiliecache);
 
-			$dropdownsmiliesurl = $dropdownsmiliesdes = $dropdownsmiliesnam = $dropdownsmiliesurlmore = $dropdownsmiliesdesmore = $dropdownsmiliesnamemore = "";
+			$rinsmiledir = $dropdownsmiliesurl = $dropdownsmiliesdes = $dropdownsmiliesnam = $dropdownsmiliesurlmore = $dropdownsmiliesdesmore = $dropdownsmiliesnamemore = "";
 			$i = 0;
 
 			foreach($smiliecache as $smilie)
@@ -642,6 +644,9 @@ function rineditor_inserter_quick($smilies = true)
 					$dropdownsmiliesurl .= '"'.$mybb->asset_url.'/'.$image.'",';
 					$dropdownsmiliesdes .= '"'.$find.'",';
 					$dropdownsmiliesname .= '"'.$name.'",';
+					if (empty($rinsmiledir)) {
+						$rinsmiledir = substr($dropdownsmiliesurl, 1, strrpos($dropdownsmiliesurl, '/'));
+					}
 				}
 				else
 				{
@@ -655,7 +660,7 @@ function rineditor_inserter_quick($smilies = true)
 		}
 	}
 
-	$quickquote = $sourcemode = $rin_height = $rin_rmvbut = $rin_extbut = $rin_extbutd = $rin_imgur = $rin_autosave = $rinlang = $rinscsmiley = "";
+	$quickquote = $sourcemode = $rin_height = $rin_rmvbut = $rin_extbut = $rin_extbutd = $rin_imgur = $rin_autosave = $rinlang = $rinscsmiley = $rin_vbquote = "";
 
 	if(strpos($templatelist,'showthread_quickreply') || strpos($templatelist,'private_quickreply')) {
 		$rin_height = $mybb->settings['rineditor_height_other'];
@@ -686,7 +691,21 @@ function rineditor_inserter_quick($smilies = true)
 	else {
 		$sourcemode = "wysiwyg";
 	}
-	
+
+	if($plugins_cache['active']['vbquote']) {
+		$rin_vbquote = 1;
+	}
+	else {
+		$rin_vbquote = 0;
+	}
+
+	if(substr($theme['editortheme'], 0, 4) === "rin-") {
+		$rin_style = substr($theme['editortheme'], 0, -4);
+	}
+	else {
+		$rin_style = 'rin-moonocolor';
+	}
+
 	$rinlang = $mybb->settings['rineditor_language'];
 	$rinscsmiley = $mybb->settings['rineditor_smiley_sc'];
 
