@@ -13,14 +13,14 @@
  * @requires jQuery and Mybb
  * @credits CKEditor (http://ckeditor.com/).
  */
-
+s
 // Disallow direct access to this file for security reasons
 if(!defined("IN_MYBB"))
 {
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.7.0');
+define('RE_PLUGIN_VER', '0.7.1');
 
 function rineditor_info()
 {
@@ -550,7 +550,7 @@ function re_cache()
 
 function rineditor_inserter_quick($smilies = true)
 {
-	global $db, $mybb, $theme, $templates, $lang, $smiliecache, $cache, $templatelist, $plugins_cache;
+	global $db, $mybb, $theme, $templates, $lang, $smiliecache, $cache, $templatelist, $cache;
 
 	if (!$lang->rineditor) {
 		$lang->load('rineditor');
@@ -692,7 +692,8 @@ function rineditor_inserter_quick($smilies = true)
 		$sourcemode = "wysiwyg";
 	}
 
-	if($plugins_cache['active']['vbquote']) {
+	$plu_vb = $cache->read("plugins");
+	if($plu_vb['active']['vbquote']) {
 		$rin_vbquote = 1;
 	}
 	else {
