@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.7.2');
+define('RE_PLUGIN_VER', '0.7.3');
 
 function rineditor_info()
 {
@@ -299,6 +299,7 @@ rinimgur = '{\$rin_imgur}';
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/ckeditor.js?ver=".RE_PLUGIN_VER."\"></script>
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/adapters/jquery.js?ver=".RE_PLUGIN_VER."\"></script>
 {\$quickquote}
+{\$quickquotesty}
 <script type=\"text/javascript\">
 $('#message, #signature').ckeditor();
 
@@ -393,7 +394,7 @@ if(typeof Thread !== 'undefined')
 		$db->insert_query('templates', $new_template_global);
 	}
 
-	$new_template['postbit_quickquote'] = "<button style=\"display: none; float: right;\" id=\"qr_pid_{\$post['pid']}\">{\$lang->postbit_button_quote}</button>
+	$new_template['postbit_quickquote'] = "<div class=\"rin-qc\" style=\"display: none;\" id=\"qr_pid_{\$post['pid']}\"><span>{\$lang->postbit_button_quote}</span></div>
 <script type=\"text/javascript\">
 	\$(document).ready(function() {
 		quick_quote({\$post['pid']},'{\$post['username']}',{\$post['dateline']});
@@ -660,7 +661,7 @@ function rineditor_inserter_quick($smilies = true)
 		}
 	}
 
-	$quickquote = $sourcemode = $rin_height = $rin_rmvbut = $rin_extbut = $rin_extbutd = $rin_imgur = $rin_autosave = $rinlang = $rinscsmiley = $rin_vbquote = "";
+	$quickquote = $quickquotesty = $sourcemode = $rin_height = $rin_rmvbut = $rin_extbut = $rin_extbutd = $rin_imgur = $rin_autosave = $rinlang = $rinscsmiley = $rin_vbquote = "";
 
 	if(strpos($templatelist,'showthread_quickreply') || strpos($templatelist,'private_quickreply')) {
 		$rin_height = $mybb->settings['rineditor_height_other'];
@@ -682,6 +683,7 @@ function rineditor_inserter_quick($smilies = true)
 
 	if($mybb->settings['rineditor_quickquote'] == 1 && strpos($templatelist,'showthread_quickreply')) {
 		$quickquote = "<script type=\"text/javascript\" src=\"".$mybb->asset_url."/jscripts/rin/editor/thread.quickquote.js?ver=".RE_PLUGIN_VER."\"></script>";
+		$quickquotesty = "<link rel=\"stylesheet\" href=\"".$mybb->asset_url."/jscripts/rin/editor/quickquote.css?ver=".RE_PLUGIN_VER."\" type=\"text/css\" />";
 	}
 
 	if($mybb->user['sourceeditor'] == 1)
