@@ -3,7 +3,7 @@
  * Rin Editor (Powerd by CKEditor)
  * https://github.com/martec
  *
- * Copyright (C) 2015-2016, Martec
+ * Copyright (C) 2015-2017, Martec
  *
  * Rin Editor is licensed under the GPL Version 3, 29 June 2007 license:
  *	http://www.gnu.org/copyleft/gpl.html
@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.7.4');
+define('RE_PLUGIN_VER', '0.7.5');
 
 function rineditor_info()
 {
