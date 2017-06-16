@@ -1,5 +1,5 @@
 ﻿/*
- Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
+ Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
  For licensing, see LICENSE.md or http://ckeditor.com/license
 */
 CKEDITOR.dialog.add("specialchar",function(h){var e,n=h.lang.specialchar,m=function(c){var a;c=c.data?c.data.getTarget():new CKEDITOR.dom.element(c);"a"==c.getName()&&(a=c.getChild(0).getHtml())&&(c.removeClass("cke_light_background"),e.hide(),"source"==h.mode?MyBBEditor.insertText(a,"",h.name+"_2"):(c=h.document.createElement("span"),c.setHtml(a),h.insertText(c.getText())))},p=CKEDITOR.tools.addFunction(m),l,g=function(c,a){var b;a=a||c.data.getTarget();"span"==a.getName()&&(a=a.getParent());if("a"==
