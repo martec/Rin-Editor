@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.8.0');
+define('RE_PLUGIN_VER', '0.8.1');
 
 function rineditor_info()
 {
@@ -148,6 +148,26 @@ function rineditor_install()
 		'disporder'	=> 8,
 		'gid'		=> $groupid
 	);
+	
+	$new_setting[] = array(
+		'name'		=> 'rineditor_sel_text',
+		'title'		=> $lang->rineditor_seltext_title,
+		'description'	=> $lang->rineditor_seltext_desc,
+		'optionscode'	=> 'yesno',
+		'value'		=> '1',
+		'disporder'	=> 9,
+		'gid'		=> $groupid
+	);
+	
+	$new_setting[] = array(
+		'name'		=> 'rineditor_partial_mode',
+		'title'		=> $lang->rineditor_partial_title,
+		'description'	=> $lang->rineditor_partial_desc,
+		'optionscode'	=> 'yesno',
+		'value'		=> '0',
+		'disporder'	=> 10,
+		'gid'		=> $groupid
+	);
 
 	$new_setting[] = array(
 		'name'		=> 'rineditor_height_full',
@@ -155,7 +175,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_heightf_desc,
 		'optionscode'	=> 'numeric',
 		'value'		=> '250',
-		'disporder'	=> 9,
+		'disporder'	=> 11,
 		'gid'		=> $groupid
 	);
 
@@ -165,7 +185,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_heighto_desc,
 		'optionscode'	=> 'numeric',
 		'value'		=> '200',
-		'disporder'	=> 10,
+		'disporder'	=> 12,
 		'gid'		=> $groupid
 	);
 
@@ -175,7 +195,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_buttonsf_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> 'Subscript,Superscript',
-		'disporder'	=> 11,
+		'disporder'	=> 13,
 		'gid'		=> $groupid
 	);
 
@@ -185,7 +205,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_buttonsf_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> 'Subscript,Superscript',
-		'disporder'	=> 12,
+		'disporder'	=> 14,
 		'gid'		=> $groupid
 	);
 
@@ -195,7 +215,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 13,
+		'disporder'	=> 15,
 		'gid'		=> $groupid
 	);
 
@@ -205,7 +225,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 14,
+		'disporder'	=> 16,
 		'gid'		=> $groupid
 	);
 
@@ -215,7 +235,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 15,
+		'disporder'	=> 17,
 		'gid'		=> $groupid
 	);
 
@@ -225,7 +245,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 16,
+		'disporder'	=> 18,
 		'gid'		=> $groupid
 	);
 
@@ -235,7 +255,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_imgur_desc,
 		'optionscode'	=> 'text',
 		'value'		=> '',
-		'disporder'	=> 17,
+		'disporder'	=> 19,
 		'gid'		=> $groupid
 	);
 
@@ -293,7 +313,9 @@ rinautosave = '{\$rin_autosave}',
 rinautosavemsg = '{\$mybb->settings['rineditor_autosave_message']}',
 rinvbquote = {\$rin_vbquote},
 rinskin = '{\$rin_style}',
-rinimgur = '{\$rin_imgur}';
+rinimgur = '{\$rin_imgur}',
+seltext = '{\$mybb->settings['rineditor_sel_text']}',
+partialmode = '{\$mybb->settings['rineditor_partial_mode']}';
 </script>
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/rineditor.js?ver=".RE_PLUGIN_VER."\"></script>
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/ckeditor.js?ver=".RE_PLUGIN_VER."\"></script>
