@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.8.3');
+define('RE_PLUGIN_VER', '0.8.4');
 
 function rineditor_info()
 {
@@ -665,7 +665,7 @@ function rineditor_inserter_quick($smilies = true)
 				if($i < $mybb->settings['smilieinsertertot'])
 				{
 					$dropdownsmiliesurl .= '"'.$mybb->asset_url.'/'.$image.'",';
-					$dropdownsmiliesdes .= '" '.$find.' ",';
+					$dropdownsmiliesdes .= '"'.$find.'",';
 					$dropdownsmiliesname .= '"'.$name.'",';
 					if (empty($rinsmiledir)) {
 						$rinsmiledir = substr($dropdownsmiliesurl, 1, strrpos($dropdownsmiliesurl, '/'));
@@ -674,7 +674,7 @@ function rineditor_inserter_quick($smilies = true)
 				else
 				{
 					$dropdownsmiliesurlmore .= '"'.$mybb->asset_url.'/'.$image.'",';
-					$dropdownsmiliesdesmore .= '" '.$find.' ",';
+					$dropdownsmiliesdesmore .= '"'.$find.'",';
 					$dropdownsmiliesnamemore .= '"'.$name.'",';
 				}
 
