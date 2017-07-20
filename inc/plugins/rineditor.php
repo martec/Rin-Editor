@@ -46,7 +46,7 @@ EOF;
 		'author'		=> 'martec',
 		'authorsite'	=> 'http://community.mybb.com/user-49058.html',
 		'version'		=> RE_PLUGIN_VER,
-		'codename'		=> 'RCE'
+		'codename'		=> 'RCE',
 		'compatibility' => '18*'
 	);
 
