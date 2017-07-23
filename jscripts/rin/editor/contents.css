@@ -53,7 +53,7 @@ blockquote:before:-moz-only-whitespace {
 	display: none;
 }
 
-blockquote[data-type='codeblock']:before, blockquote[data-type='phpcodeblock']:before {
+blockquote[data-cite='codeblock']:before, blockquote[data-cite='phpcodeblock']:before {
 	font-weight: bold;
 	content: 'Code:';
 	display: block;
@@ -62,12 +62,12 @@ blockquote[data-type='codeblock']:before, blockquote[data-type='phpcodeblock']:b
 	margin-bottom: 10px;
 }
 
-blockquote[data-type='phpcodeblock']:before {
+blockquote[data-cite='phpcodeblock']:before {
 	content: 'PHP Code:' !important;
 	color: #333 !important;
 }
 
-blockquote[data-type='codeblock'], blockquote[data-type='phpcodeblock'] {
+blockquote[data-cite='codeblock'], blockquote[data-cite='phpcodeblock'] {
 	font-family: Monaco, Consolas, Courier, monospace;
 	font-size: 13px !important;
 	padding: 10px;
@@ -81,7 +81,7 @@ blockquote[data-type='codeblock'], blockquote[data-type='phpcodeblock'] {
 	border-radius: 6px;
 }
 
-blockquote[data-type='phpcodeblock'] {
+blockquote[data-cite='phpcodeblock'] {
 	color: #0000BB;
 }
 

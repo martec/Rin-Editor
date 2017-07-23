@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.8.8');
+define('RE_PLUGIN_VER', '0.8.9');
 
 function rineditor_info()
 {
