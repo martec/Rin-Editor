@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.8.7');
+define('RE_PLUGIN_VER', '0.8.8');
 
 function rineditor_info()
 {
@@ -46,7 +46,7 @@ EOF;
 		'author'		=> 'martec',
 		'authorsite'	=> 'http://community.mybb.com/user-49058.html',
 		'version'		=> RE_PLUGIN_VER,
-		'codename'		=> 'RCE',
+		'codename'		=> 'rineditor',
 		'compatibility' => '18*'
 	);
 
@@ -58,8 +58,8 @@ function rineditor_install()
 
 	$lang->load('config_rineditor');
 
-	$query	= $db->simple_select("settinggroups", "COUNT(*) as rows");
-	$dorder = $db->fetch_field($query, 'rows') + 1;
+	$query	= $db->simple_select("settinggroups", "COUNT(*) as counts");
+	$dorder = $db->fetch_field($query, 'counts') + 1;
 
 	$groupid = $db->insert_query('settinggroups', array(
 		'name'		=> 'rineditor',
@@ -268,8 +268,8 @@ function rineditor_is_installed()
 {
 	global $db;
 
-	$query = $db->simple_select("settinggroups", "COUNT(*) as rows", "name = 'rineditor'");
-	$rows  = $db->fetch_field($query, 'rows');
+	$query = $db->simple_select("settinggroups", "COUNT(*) as counts", "name = 'rineditor'");
+	$rows  = $db->fetch_field($query, 'counts');
 
 	return ($rows > 0);
 }
