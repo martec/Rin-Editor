@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.8.10');
+define('RE_PLUGIN_VER', '0.9.0');
 
 function rineditor_info()
 {
@@ -329,6 +329,9 @@ $('#message, #signature').ckeditor();
 (\$.fn.on || \$.fn.live).call(\$(document), 'click', '.quick_edit_button', function () {
 	ed_id = \$(this).attr('id');
 	var pid = ed_id.replace( /[^0-9]/g, '');
+	if (typeof CKEDITOR.instances['quickedit_'+pid] !== \"undefined\") {
+		CKEDITOR.instances['quickedit_'+pid].destroy;
+	}
 	setTimeout(function() {
 		CKEDITOR.replace( 'quickedit_'+pid );
 		if (CKEDITOR.instances['quickedit_'+pid]) {
