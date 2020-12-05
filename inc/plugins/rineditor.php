@@ -3,7 +3,7 @@
  * Rin Editor (Powerd by CKEditor)
  * https://github.com/martec
  *
- * Copyright (C) 2015-2017, Martec
+ * Copyright (C) 2015-2020, Martec
  *
  * Rin Editor is licensed under the GPL Version 3, 29 June 2007 license:
  *	http://www.gnu.org/copyleft/gpl.html
@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '0.9.7');
+define('RE_PLUGIN_VER', '1.0.0');
 
 function rineditor_info()
 {
@@ -144,8 +144,9 @@ function rineditor_install()
 		'name'		=> 'rineditor_autosave_message',
 		'title'		=> $lang->rineditor_autosavemsg_title,
 		'description'	=> $lang->rineditor_autosavemsg_desc,
-		'optionscode'	=> 'yesno',
-		'value'		=> '1',
+		'optionscode'	=> 'select
+'.$lang->rineditor_autosavemsg_val.'',
+		'value'		=> '',
 		'disporder'	=> 8,
 		'gid'		=> $groupid
 	);
