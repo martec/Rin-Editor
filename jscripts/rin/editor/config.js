@@ -19,6 +19,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'styles' },
 		{ name: 'colors', groups: [ 'colors', 'cleanup' ] },
 		{ name: 'insert' },
+		{ name: 'links' },
 		{ name: 'list' },
 		{ name: 'blocks', groups: [ 'blocks', 'clipboard' ] },
 		{ name: 'extra', groups: [ 'extra', 'extradesc' ] },
