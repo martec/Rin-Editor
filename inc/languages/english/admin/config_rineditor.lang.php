@@ -86,7 +86,8 @@ $l['rineditor_autosave_desc'] = 'Set to yes if you want disable autosave feature
 $l['rineditor_autosavemsg_title'] = 'Autosaved Notification';
 $l['rineditor_autosavemsg_desc'] = 'Set autosave notification type.';
 $l['rineditor_autosavemsg_val'] = '=notification
-statusbar=statusbar';
+statusbar=statusbar
+no=none';
 $l['rineditor_seltext_title'] = 'Do not replace selected text';
 $l['rineditor_seltext_desc'] = 'Set to yes if you do not want that selected text is replaced when the custom button is triggered.<br /><strong>Ps.</strong> Enabling this function may result in some bugs.';
 $l['rineditor_partial_title'] = 'Partial Mode';

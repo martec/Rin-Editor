@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '1.0.3');
+define('RE_PLUGIN_VER', '1.0.4');
 
 function rineditor_info()
 {
@@ -317,13 +317,15 @@ rinvbquote = {\$rin_vbquote},
 rinskin = '{\$rin_style}',
 rinimgur = '{\$rin_imgur}',
 seltext = '{\$mybb->settings['rineditor_sel_text']}',
-partialmode = '{\$mybb->settings['rineditor_partial_mode']}';
+partialmode = '{\$mybb->settings['rineditor_partial_mode']}',
+content_url = '{\$content_skin}';
 </script>
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/rineditor.js?ver=".RE_PLUGIN_VER."\"></script>
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/ckeditor.js?ver=".RE_PLUGIN_VER."\"></script>
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/adapters/jquery.js?ver=".RE_PLUGIN_VER."\"></script>
 {\$quickquote}
 {\$quickquotesty}
+{\$black_text}
 <script type=\"text/javascript\">
 $('#message, #signature').ckeditor();
 
@@ -691,7 +693,7 @@ function rineditor_inserter_quick($smilies = true)
 		}
 	}
 
-	$quickquote = $quickquotesty = $sourcemode = $rin_height = $rin_rmvbut = $rin_extbut = $rin_extbutd = $rin_imgur = $rin_autosave = $rinlang = $rinscsmiley = $rin_vbquote = "";
+	$quickquote = $quickquotesty = $sourcemode = $rin_height = $rin_rmvbut = $rin_extbut = $rin_extbutd = $rin_imgur = $rin_autosave = $rinlang = $rinscsmiley = $rin_vbquote = $black_text = $content_skin = "";
 
 	if(strpos($templatelist,'showthread_quickreply') || strpos($templatelist,'private_quickreply')) {
 		$rin_height = $mybb->settings['rineditor_height_other'];
@@ -732,9 +734,27 @@ function rineditor_inserter_quick($smilies = true)
 		$rin_vbquote = 0;
 	}
 
+	$content_skin = "".$mybb->asset_url."/jscripts/rin/editor/contents.css?ver=".RE_PLUGIN_VER."";
 	if(substr($theme['editortheme'], 0, 4) === "rin-") {
 		$rin_style = substr($theme['editortheme'], 0, -4);
-	}
+	} 
+	elseif (substr($theme['editortheme'], 0, 6) === "b_rin-") {
+		$rin_style = substr($theme['editortheme'], 2, -4);
+		$black_text = "<style type=\"text/css\">
+textarea.cke_source {
+	background-color: #222222 !important;
+	height: 100% !important;
+	width: 100% !important;
+	color: #eeeeee !important;
+	margin: 0px !important;
+	border-radius: 0px !important;
+}
+.cke_wysiwyg_frame {
+	background-color: #222222 !important;
+}
+</style>";
+		$content_skin = "".$mybb->asset_url."/jscripts/rin/editor/contents_black.css?ver=".RE_PLUGIN_VER."";
+	} 
 	else {
 		$rin_style = 'rin-moonocolor';
 	}
