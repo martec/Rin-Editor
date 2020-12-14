@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '1.0.6');
+define('RE_PLUGIN_VER', '1.0.7');
 
 function rineditor_info()
 {
@@ -818,11 +818,13 @@ if($settings['rineditor_quickquote'] && $settings['rineditor_enb_quick']) {
 
 function re_quickquote_postbit(&$post)
 {
-	global $templates, $lang;
+	global $templates, $lang, $mybb, $forum;
 
 	$post['quick_quote'] = '';
-	eval("\$post['quick_quote'] = \"" . $templates->get("postbit_quickquote") . "\";");
-
+	// If MyCode is on for this forum and the MyCode editor is enabled in the Admin CP, enable quick quote.
+	if($mybb->settings['bbcodeinserter'] != 0 && $forum['allowmycode'] != 0 && (!$mybb->user['uid'] || $mybb->user['showcodebuttons'] != 0)) {
+		eval("\$post['quick_quote'] = \"" . $templates->get("postbit_quickquote") . "\";");
+	}
 }
 
 if($settings['rineditor_smile']) {
