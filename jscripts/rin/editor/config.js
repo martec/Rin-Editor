@@ -39,7 +39,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.contentsCss = content_url;
 	config.title = false;
-	config.image_prefillDimensions = false;
+	config.image_prefillDimensions = parseInt(rin_img_resize) ? true : false;
 	config.height = rinheight;
 	config.fontSize_sizes = 'xx-small;x-small;small;medium;large;x-large;xx-large';
 	config.smiley_images = dropdownsmiliesurl.concat(dropdownsmiliesurlmore);

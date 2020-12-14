@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '1.0.4');
+define('RE_PLUGIN_VER', '1.0.5');
 
 function rineditor_info()
 {
@@ -69,13 +69,14 @@ function rineditor_install()
 		'isdefault'	=> '0'
 	));
 
+	$dorder_set = 0;
 	$new_setting[] = array(
 		'name'		=> 'rineditor_enb_quick',
 		'title'		=> $lang->rineditor_enbquick_title,
 		'description'	=> $lang->rineditor_enbquick_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '1',
-		'disporder'	=> 1,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 	
@@ -86,7 +87,7 @@ function rineditor_install()
 		'optionscode'	=> 'select
 '.$lang->rineditor_language_val.'',
 		'value'		=> '',
-		'disporder'	=> 2,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 	
@@ -96,7 +97,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_mobms_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '1',
-		'disporder'	=> 3,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 
@@ -106,7 +107,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_quickquote_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '1',
-		'disporder'	=> 4,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 
@@ -116,7 +117,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_smile_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '1',
-		'disporder'	=> 5,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 	
@@ -126,7 +127,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_scsmiley_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '0',
-		'disporder'	=> 6,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 
@@ -136,7 +137,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_autosave_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '0',
-		'disporder'	=> 7,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 	
@@ -147,7 +148,7 @@ function rineditor_install()
 		'optionscode'	=> 'select
 '.$lang->rineditor_autosavemsg_val.'',
 		'value'		=> '',
-		'disporder'	=> 8,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 	
@@ -157,7 +158,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_seltext_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '1',
-		'disporder'	=> 9,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 	
@@ -167,7 +168,17 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_partial_desc,
 		'optionscode'	=> 'yesno',
 		'value'		=> '0',
-		'disporder'	=> 10,
+		'disporder'	=> ++$dorder_set,
+		'gid'		=> $groupid
+	);
+	
+	$new_setting[] = array(
+		'name'		=> 'rineditor_img_resize',
+		'title'		=> $lang->rineditor_imgs_title,
+		'description'	=> $lang->rineditor_imgs_desc,
+		'optionscode'	=> 'yesno',
+		'value'		=> '0',
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 
@@ -177,7 +188,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_heightf_desc,
 		'optionscode'	=> 'numeric',
 		'value'		=> '250',
-		'disporder'	=> 11,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 
@@ -187,7 +198,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_heighto_desc,
 		'optionscode'	=> 'numeric',
 		'value'		=> '200',
-		'disporder'	=> 12,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 
@@ -197,7 +208,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_buttonsf_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> 'Subscript,Superscript',
-		'disporder'	=> 13,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 
@@ -207,7 +218,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_buttonsf_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> 'Subscript,Superscript',
-		'disporder'	=> 14,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 
@@ -217,7 +228,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 15,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 
@@ -227,7 +238,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 16,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 
@@ -237,7 +248,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 17,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 
@@ -247,7 +258,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_rules_desc,
 		'optionscode'	=> 'textarea',
 		'value'		=> '',
-		'disporder'	=> 18,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 
@@ -257,7 +268,7 @@ function rineditor_install()
 		'description'	=> $lang->rineditor_imgur_desc,
 		'optionscode'	=> 'text',
 		'value'		=> '',
-		'disporder'	=> 19,
+		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
 
@@ -318,6 +329,7 @@ rinskin = '{\$rin_style}',
 rinimgur = '{\$rin_imgur}',
 seltext = '{\$mybb->settings['rineditor_sel_text']}',
 partialmode = '{\$mybb->settings['rineditor_partial_mode']}',
+rin_img_resize = '{\$mybb->settings['rineditor_img_resize']}',
 content_url = '{\$content_skin}';
 </script>
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/rineditor.js?ver=".RE_PLUGIN_VER."\"></script>
