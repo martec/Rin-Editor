@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '1.0.5');
+define('RE_PLUGIN_VER', '1.0.6');
 
 function rineditor_info()
 {
@@ -79,7 +79,7 @@ function rineditor_install()
 		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
-	
+
 	$new_setting[] = array(
 		'name'		=> 'rineditor_language',
 		'title'		=> $lang->rineditor_language_title,
@@ -90,7 +90,7 @@ function rineditor_install()
 		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
-	
+
 	$new_setting[] = array(
 		'name'		=> 'rineditor_mobm_source',
 		'title'		=> $lang->rineditor_mobms_title,
@@ -120,7 +120,7 @@ function rineditor_install()
 		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
-	
+
 	$new_setting[] = array(
 		'name'		=> 'rineditor_smiley_sc',
 		'title'		=> $lang->rineditor_scsmiley_title,
@@ -140,7 +140,7 @@ function rineditor_install()
 		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
-	
+
 	$new_setting[] = array(
 		'name'		=> 'rineditor_autosave_message',
 		'title'		=> $lang->rineditor_autosavemsg_title,
@@ -151,7 +151,7 @@ function rineditor_install()
 		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
-	
+
 	$new_setting[] = array(
 		'name'		=> 'rineditor_sel_text',
 		'title'		=> $lang->rineditor_seltext_title,
@@ -161,7 +161,7 @@ function rineditor_install()
 		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
-	
+
 	$new_setting[] = array(
 		'name'		=> 'rineditor_partial_mode',
 		'title'		=> $lang->rineditor_partial_title,
@@ -171,7 +171,7 @@ function rineditor_install()
 		'disporder'	=> ++$dorder_set,
 		'gid'		=> $groupid
 	);
-	
+
 	$new_setting[] = array(
 		'name'		=> 'rineditor_img_resize',
 		'title'		=> $lang->rineditor_imgs_title,
@@ -536,12 +536,12 @@ function rineditor_deactivate()
 		'#' . preg_quote('{$post[\'quick_quote\']}{$post[\'iplogged\']}') . '#i',
 		'{$post[\'iplogged\']}'
 	);
-	
+
 	find_replace_templatesets(
 		'postbit',
 		'#' . preg_quote('{$post[\'quick_quote\']}{$post[\'iplogged\']}') . '#i',
 		'{$post[\'iplogged\']}'
-	);	
+	);
 
 	find_replace_templatesets(
 		'post_attachments_attachment_postinsert',
@@ -612,7 +612,7 @@ function rineditor_inserter_quick($smilies = true)
 		"editor_youtube" => "Youtube",
 		"editor_facebook" => "Facebook",
 		"editor_liveleak" => "LiveLeak",
-		"editor_twitch" => "Twitch",		
+		"editor_twitch" => "Twitch",
 		"editor_insertvideo" => "Insert a video",
 		"editor_more" => "More",
 		"rineditor_restore" => "Restore",
@@ -749,7 +749,7 @@ function rineditor_inserter_quick($smilies = true)
 	$content_skin = "".$mybb->asset_url."/jscripts/rin/editor/contents.css?ver=".RE_PLUGIN_VER."";
 	if(substr($theme['editortheme'], 0, 4) === "rin-") {
 		$rin_style = substr($theme['editortheme'], 0, -4);
-	} 
+	}
 	elseif (substr($theme['editortheme'], 0, 6) === "b_rin-") {
 		$rin_style = substr($theme['editortheme'], 2, -4);
 		$black_text = "<style type=\"text/css\">
@@ -766,7 +766,7 @@ textarea.cke_source {
 }
 </style>";
 		$content_skin = "".$mybb->asset_url."/jscripts/rin/editor/contents_black.css?ver=".RE_PLUGIN_VER."";
-	} 
+	}
 	else {
 		$rin_style = 'rin-moonocolor';
 	}
@@ -804,9 +804,12 @@ function rineditor_replace($page) {
 
 function rineditor () {
 
-	global $rinbutquick;
+	global $rinbutquick, $mybb, $forum;
 
-	$rinbutquick = rineditor_inserter_quick();
+	// If MyCode is on for this forum and the MyCode editor is enabled in the Admin CP, draw the rin editor.
+	if($mybb->settings['bbcodeinserter'] != 0 && $forum['allowmycode'] != 0 && (!$mybb->user['uid'] || $mybb->user['showcodebuttons'] != 0)) {
+		$rinbutquick = rineditor_inserter_quick();
+	}
 }
 
 if($settings['rineditor_quickquote'] && $settings['rineditor_enb_quick']) {
@@ -829,8 +832,11 @@ if($settings['rineditor_smile']) {
 
 function rineditor_quick () {
 
-	global $smilieinserter;
+	global $smilieinserter, $mybb, $forum;
 
-	$smilieinserter = build_clickable_smilies();
+	// If MyCode is on for this forum and the MyCode editor is enabled in the Admin CP, draw the smile inserter.
+	if($mybb->settings['bbcodeinserter'] != 0 && $forum['allowmycode'] != 0 && (!$mybb->user['uid'] || $mybb->user['showcodebuttons'] != 0)) {
+		$smilieinserter = build_clickable_smilies();
+	}
 }
 ?>
