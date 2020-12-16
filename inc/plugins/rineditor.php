@@ -804,10 +804,25 @@ function rineditor_replace($page) {
 
 function rineditor () {
 
-	global $rinbutquick, $mybb, $forum;
+	global $rinbutquick, $mybb, $forum, $plugins, $calendar;
+
+	$allow_mycode = true;
+
+	if($plugins->current_hook == 'private_start')
+	{
+		$allow_mycode = $mybb->settings['pmsallowmycode'];
+	}
+	elseif($plugins->current_hook == 'calendar_start' && isset($calendar['allowmycode']))
+	{
+		$allow_mycode = $calendar['allowmycode'];
+	}
+	elseif(isset($forum['allowmycode']))
+	{
+		$allow_mycode = $forum['allowmycode'];
+	}
 
 	// If MyCode is on for this forum and the MyCode editor is enabled in the Admin CP, draw the rin editor.
-	if($mybb->settings['bbcodeinserter'] != 0 && $forum['allowmycode'] != 0 && (!$mybb->user['uid'] || $mybb->user['showcodebuttons'] != 0)) {
+	if($mybb->settings['bbcodeinserter'] != 0 && $allow_mycode && (!$mybb->user['uid'] || $mybb->user['showcodebuttons'] != 0)) {
 		$rinbutquick = rineditor_inserter_quick();
 	}
 }
