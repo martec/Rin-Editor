@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '1.1.0');
+define('RE_PLUGIN_VER', '1.1.1');
 
 function rineditor_info()
 {
@@ -618,6 +618,8 @@ function rineditor_inserter_quick($smilies = true)
 		"rineditor_restore" => "Restore",
 		"rineditor_uploading" => "Uploading",
 		"rineditor_fail" => "Fail",
+		"wrote" => "Wrote",
+		"quote" => "Quote"
 	);
 	$editor_language = "RinEditor = {\n";
 

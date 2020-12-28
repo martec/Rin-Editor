@@ -45,10 +45,23 @@ blockquote {
 	border-radius: 6px;
 }
 
+pre {
+	background: white;
+	margin: .25em .05em 0 0;
+	border: 1px solid #ccc;
+	padding: 10px;
+	background-color: #171717;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
 blockquote:before {
 	font-weight: bold;
 	font-style: normal;
-	content: attr(data-cite);
+	content: attr(data-show);
 	display: block;
 	font-size: 1em;
 	border-bottom: 1px solid #ccc;
@@ -56,11 +69,7 @@ blockquote:before {
 	padding-bottom: 3px;
 }
 
-blockquote:before:-moz-only-whitespace {
-	display: none;
-}
-
-blockquote[data-cite='codeblock']:before, blockquote[data-cite='phpcodeblock']:before {
+pre:before {
 	font-weight: bold;
 	content: 'Code:';
 	display: block;
@@ -70,11 +79,29 @@ blockquote[data-cite='codeblock']:before, blockquote[data-cite='phpcodeblock']:b
 	margin-bottom: 10px;
 }
 
-blockquote[data-cite='phpcodeblock']:before {
+blockquote:before:-moz-only-whitespace {
+	display: none;
+}
+
+pre:before:-moz-only-whitespace {
+	display: none;
+}
+
+pre[data-cite='codeblock']:before, pre[data-cite='phpcodeblock']:before {
+	font-weight: bold;
+	content: 'Code:';
+	display: block;
+	border-bottom: 1px solid #ccc;
+	padding: 4px 0 3px 0;
+	color: #eeeeee !important;
+	margin-bottom: 10px;
+}
+
+pre[data-cite='phpcodeblock']:before {
 	content: 'PHP Code:' !important;
 }
 
-blockquote[data-cite='codeblock'], blockquote[data-cite='phpcodeblock'] {
+pre[data-cite='codeblock'], pre[data-cite='phpcodeblock'] {
 	font-family: Monaco, Consolas, Courier, monospace;
 	font-size: 13px !important;
 	padding: 10px;
