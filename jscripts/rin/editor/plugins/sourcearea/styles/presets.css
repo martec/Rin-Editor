@@ -1,0 +1,19 @@
+/*
+Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
+*/
+
+/* Editable regions */
+textarea.cke_source
+{
+	font-family: Tahoma, Verdana, Arial, Sans-Serif;
+	font-size: 14px;
+	background-color: #fff;
+	white-space: pre-wrap;
+	border: none;
+	padding: 10px;
+	display: block;
+	width: 98% !important;
+	height: 93% !important;
+	color: #000 !important;
+}

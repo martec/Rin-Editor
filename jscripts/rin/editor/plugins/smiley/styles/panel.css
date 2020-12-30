@@ -1,0 +1,13 @@
+/*
+Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+.cke_smiley_drop {
+	width: auto !important;
+	height: auto !important;
+	max-width: 250px;
+	min-height: 150px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
