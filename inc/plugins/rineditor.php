@@ -3,7 +3,7 @@
  * Rin Editor (Powerd by CKEditor)
  * https://github.com/martec
  *
- * Copyright (C) 2015-2020, Martec
+ * Copyright (C) 2015-2021, Martec
  *
  * Rin Editor is licensed under the GPL Version 3, 29 June 2007 license:
  *	http://www.gnu.org/copyleft/gpl.html
@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '1.1.7');
+define('RE_PLUGIN_VER', '1.1.8');
 
 function rineditor_info()
 {
@@ -783,8 +783,6 @@ textarea.cke_source {
 
 global $settings;
 
-$plugins->add_hook('pre_output_page', 'rineditor_replace', 100);
-
 $enbq = '';
 
 if($settings['rineditor_enb_quick']) {
@@ -794,14 +792,6 @@ if($settings['rineditor_enb_quick']) {
 $plugin_local = array($enbq, 'calendar_start', 'editpost_start', 'modcp_start', 'newreply_start', 'newthread_start', 'private_start', 'usercp_start', 'warnings_start');
 foreach ($plugin_local as &$local) {
 	$plugins->add_hook(''.$local.'', 'rineditor');
-}
-
-function rineditor_replace($page) {
-
-	$page = str_replace(build_mycode_inserter('signature'), '', $page);
-	$page = str_replace(build_mycode_inserter('message'), '', $page);
-
-	return $page;
 }
 
 function rineditor () {
