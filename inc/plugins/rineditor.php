@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RE_PLUGIN_VER', '1.1.11');
+define('RE_PLUGIN_VER', '1.2.0');
 
 function rineditor_info()
 {
@@ -332,9 +332,7 @@ partialmode = '{\$mybb->settings['rineditor_partial_mode']}',
 rin_img_resize = '{\$mybb->settings['rineditor_img_resize']}',
 content_url = '{\$content_skin}';
 </script>
-<script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/rineditor.js?ver=".RE_PLUGIN_VER."\"></script>
-<script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/ckeditor.js?ver=".RE_PLUGIN_VER."\"></script>
-<script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/editor/adapters/jquery.js?ver=".RE_PLUGIN_VER."\"></script>
+{\$rin_js_files}
 {\$quickquote}
 {\$quickquotesty}
 {\$black_text}
@@ -707,7 +705,11 @@ function rineditor_inserter_quick($smilies = true)
 		}
 	}
 
-	$quickquote = $quickquotesty = $sourcemode = $rin_height = $rin_rmvbut = $rin_extbut = $rin_extbutd = $rin_imgur = $rin_autosave = $rinlang = $rinscsmiley = $rin_vbquote = $black_text = $content_skin = "";
+	$rin_js_files = $quickquote = $quickquotesty = $sourcemode = $rin_height = $rin_rmvbut = $rin_extbut = $rin_extbutd = $rin_imgur = $rin_autosave = $rinlang = $rinscsmiley = $rin_vbquote = $black_text = $content_skin = "";
+
+	$rin_js_files = "<script type=\"text/javascript\" src=\"".$mybb->asset_url."/jscripts/rin/editor/rineditor.js?ver=".RE_PLUGIN_VER."\"></script>
+<script type=\"text/javascript\" src=\"".$mybb->asset_url."/jscripts/rin/editor/ckeditor.js?ver=".RE_PLUGIN_VER."\"></script>
+<script type=\"text/javascript\" src=\"".$mybb->asset_url."/jscripts/rin/editor/adapters/jquery.js?ver=".RE_PLUGIN_VER."\"></script>";
 
 	if(strpos($templatelist,'showthread_quickreply') || strpos($templatelist,'private_quickreply')) {
 		$rin_height = $mybb->settings['rineditor_height_other'];
