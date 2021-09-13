@@ -85,7 +85,7 @@ $l['rineditor_autosave_title'] = 'Autosave Feature';
 $l['rineditor_autosave_desc'] = 'Set to yes if you want disable autosave feature.';
 $l['rineditor_autosavemsg_title'] = 'Autosaved Notification';
 $l['rineditor_autosavemsg_desc'] = 'Set autosave notification type.';
-$l['rineditor_autosavemsg_val'] = '=notification
+$l['rineditor_autosavemsg_val'] = 'notification=notification
 statusbar=statusbar
 no=none';
 $l['rineditor_seltext_title'] = 'Do not replace selected text';
