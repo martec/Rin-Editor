@@ -592,6 +592,10 @@ function rineditor_inserter_quick($smilies = true)
 {
 	global $db, $mybb, $theme, $templates, $lang, $smiliecache, $cache, $templatelist, $cache;
 
+    if (!isset($lang->rineditor)) {
+        $lang->rineditor = NULL;
+    }
+
 	if (!$lang->rineditor) {
 		$lang->load('rineditor');
 	}
@@ -650,11 +654,11 @@ function rineditor_inserter_quick($smilies = true)
 
 		if(!$smiliecache)
 		{
-			if(!is_array($smilie_cache))
+			if(!is_array($smiliecache))
 			{
-				$smilie_cache = $cache->read("smilies");
+				$smiliecache = $cache->read("smilies");
 			}
-			foreach($smilie_cache as $smilie)
+			foreach($smiliecache as $smilie)
 			{
 				if($smilie['showclickable'] != 0)
 				{
@@ -670,7 +674,7 @@ function rineditor_inserter_quick($smilies = true)
 		{
 			reset($smiliecache);
 
-			$rinsmiledir = $dropdownsmiliesurl = $dropdownsmiliesdes = $dropdownsmiliesnam = $dropdownsmiliesurlmore = $dropdownsmiliesdesmore = $dropdownsmiliesnamemore = "";
+			$rinsmiledir = $dropdownsmiliesurl = $dropdownsmiliesdes = $dropdownsmiliesname = $dropdownsmiliesurlmore = $dropdownsmiliesdesmore = $dropdownsmiliesnamemore = "";
 			$i = 0;
 
 			foreach($smiliecache as $smilie)
@@ -743,6 +747,11 @@ function rineditor_inserter_quick($smilies = true)
 	}
 
 	$plu_vb = $cache->read("plugins");
+
+        if (!isset($plu_vb['active']['vbquote'])) {
+	    $plu_vb['active']['vbquote'] = NULL;
+        }
+
 	if($plu_vb['active']['vbquote']) {
 		$rin_vbquote = 1;
 	}
@@ -787,6 +796,10 @@ global $settings;
 
 $enbq = '';
 
+if (!isset($settings['rineditor_enb_quick'])) {
+    $settings['rineditor_enb_quick'] = NULL;
+}
+
 if($settings['rineditor_enb_quick']) {
 	$enbq = 'showthread_start';
 }
@@ -821,6 +834,10 @@ function rineditor () {
 	}
 }
 
+if (!isset($settings['rineditor_quickquote'])) {
+    $settings['rineditor_quickquote'] = NULL;
+}
+
 if($settings['rineditor_quickquote'] && $settings['rineditor_enb_quick']) {
 	$plugins->add_hook('postbit', 're_quickquote_postbit');
 }
@@ -834,6 +851,10 @@ function re_quickquote_postbit(&$post)
 	if($mybb->settings['bbcodeinserter'] != 0 && $forum['allowmycode'] != 0 && (!$mybb->user['uid'] || $mybb->user['showcodebuttons'] != 0)) {
 		eval("\$post['quick_quote'] = \"" . $templates->get("postbit_quickquote") . "\";");
 	}
+}
+
+if (!isset($settings['rineditor_smile'])) {
+    $settings['rineditor_smile'] = NULL;
 }
 
 if($settings['rineditor_smile']) {
