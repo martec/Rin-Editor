@@ -592,7 +592,6 @@ function rineditor_inserter_quick($smilies = true)
 {
 	global $db, $mybb, $theme, $templates, $lang, $smiliecache, $cache, $templatelist, $cache;
 
-    // PHP 8 fix - 2024-March-13 - Dave
     if (!isset($lang->rineditor)) {
         $lang->rineditor = NULL;
     }
@@ -749,10 +748,9 @@ function rineditor_inserter_quick($smilies = true)
 
 	$plu_vb = $cache->read("plugins");
 
-    // PHP 8 fix - 2024-March-13 - Dave
-    if (!isset($plu_vb['active']['vbquote'])) {
-        $plu_vb['active']['vbquote'] = NULL;
-    }
+        if (!isset($plu_vb['active']['vbquote'])) {
+	    $plu_vb['active']['vbquote'] = NULL;
+        }
 
 	if($plu_vb['active']['vbquote']) {
 		$rin_vbquote = 1;
@@ -798,7 +796,6 @@ global $settings;
 
 $enbq = '';
 
-// PHP 8 fix - 2024-March-13 - Dave
 if (!isset($settings['rineditor_enb_quick'])) {
     $settings['rineditor_enb_quick'] = NULL;
 }
@@ -837,7 +834,6 @@ function rineditor () {
 	}
 }
 
-// PHP 8 fix - 2024-March-13 - Dave
 if (!isset($settings['rineditor_quickquote'])) {
     $settings['rineditor_quickquote'] = NULL;
 }
@@ -857,7 +853,6 @@ function re_quickquote_postbit(&$post)
 	}
 }
 
-// PHP 8 fix - 2024-March-13 - Dave
 if (!isset($settings['rineditor_smile'])) {
     $settings['rineditor_smile'] = NULL;
 }
